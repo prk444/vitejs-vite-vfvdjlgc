@@ -1,20 +1,32 @@
-// src/components/Home.jsx
-
 import React from "react";
-import BookCard from "./components/BookCard";
-import books from "./booksData";
-import "./Home.css"; // Import the CSS for styling
+import books from "./booksdata"; 
+import { useNavigate } from "react-router-dom"; 
 
 const Home = () => {
+
+  const navigate = useNavigate();
+  
   return (
-    <div className="home-container">
-      <h1>Book Library</h1>
-      <div className="books-grid">
+    <div>
+      <h1>Book List</h1>
+
+      <button onClick={() => navigate("/add-book")} style={{ marginBottom: "20px" }}>
+        Add Book
+      </button>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
         {books.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <div key={book.id} style={{ border: "1px solid #ddd", padding: "10px", width: "200px" }}>
+            <img src={book.coverImage} alt={book.title} style={{ width: "100%", height: "150px" }} />
+            <h3>{book.title}</h3>
+            <p>by {book.author}</p>
+            <p>{book.description}</p>
+          </div>
         ))}
       </div>
     </div>
+
+   
   );
 };
 
